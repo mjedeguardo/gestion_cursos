@@ -1,0 +1,24 @@
+<div class="dashboard-layout">
+  <!-- Barra Lateral -->
+  <aside class="sidebar">
+    <div class="logo">
+      <h3>Gestión Académica</h3>
+      <span class="rol-badge">Rol: {{ rol === 1 ? 'Admin' : (rol === 2 ? 'Profesor' : 'Estudiante') }}</span>
+    </div>
+
+    <nav class="menu">
+      <a routerLink="/dashboard/usuarios" routerLinkActive="active">👥 Usuarios</a>
+      <a routerLink="/dashboard/alumnos" routerLinkActive="active">🎓 Alumnos</a>
+      <a routerLink="/dashboard/cursos" routerLinkActive="active">📚 Cursos</a>
+      <a routerLink="/dashboard/notas" routerLinkActive="active">📝 Notas</a>
+    </nav>
+
+    <button class="logout-btn" (click)="logout()">Cerrar Sesión</button>
+  </aside>
+
+  <!-- Contenido Principal -->
+  <main class="content">
+    <!-- Aquí se cargan los componentes hijos (usuarios, cursos, etc) -->
+    <router-outlet></router-outlet>
+  </main>
+</div>

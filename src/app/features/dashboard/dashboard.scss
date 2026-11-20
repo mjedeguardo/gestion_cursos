@@ -1,0 +1,70 @@
+.dashboard-layout {
+  display: flex;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #f4f6f9;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #2c3e50;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+
+  .logo {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #34495e;
+    text-align: center;
+    
+    h3 { margin: 0 0 5px; }
+    .rol-badge { 
+      background: #007bff; 
+      padding: 3px 8px; 
+      border-radius: 12px; 
+      font-size: 12px; 
+    }
+  }
+
+  .menu {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 10px;
+
+    a {
+      color: #bdc3c7;
+      text-decoration: none;
+      padding: 12px 15px;
+      border-radius: 5px;
+      margin-bottom: 5px;
+      font-size: 15px;
+      transition: 0.3s;
+
+      &:hover, &.active {
+        background-color: #34495e;
+        color: white;
+      }
+    }
+  }
+
+  .logout-btn {
+    margin: 0 20px;
+    padding: 10px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+
+    &:hover { background-color: #c0392b; }
+  }
+}
+
+.content {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+}

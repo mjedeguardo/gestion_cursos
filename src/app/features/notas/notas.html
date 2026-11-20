@@ -1,0 +1,43 @@
+<div class="header-actions">
+  <h2>Gestión de Notas</h2>
+  <button class="btn-primary" (click)="abrirModalCrear()">+ Nueva Nota</button>
+</div>
+
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th><th>ID Curso</th><th>ID Alumno</th><th>Evaluación</th><th>Calificación</th><th>Ponderación</th><th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let nota of notas" appResaltar>
+        <td>{{ nota.id_nota }}</td>
+        <td>{{ nota.id_curso }}</td>
+        <td>{{ nota.id_alumno }}</td>
+        <td>{{ nota.nombre_evaluacion }}</td>
+        <td>{{ nota.calificacion }}</td>
+        <td>{{ nota.ponderacion }}</td>
+        <td>
+          <button class="btn-edit" (click)="abrirModalEditar(nota)">Editar</button>
+          <button class="btn-delete" (click)="eliminar(nota.id_nota)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="modal-overlay" *ngIf="mostrarModal">
+  <div class="modal-content">
+    <h3>{{ editando ? 'Editar' : 'Nueva' }} Nota</h3>
+    <div class="form-group"><label>ID Curso:</label><input type="number" [(ngModel)]="notaActual.id_curso"></div>
+    <div class="form-group"><label>ID Alumno:</label><input type="number" [(ngModel)]="notaActual.id_alumno"></div>
+    <div class="form-group"><label>Evaluación:</label><input type="text" [(ngModel)]="notaActual.nombre_evaluacion"></div>
+    <div class="form-group"><label>Calificación:</label><input type="number" [(ngModel)]="notaActual.calificacion"></div>
+    <div class="form-group"><label>Ponderación:</label><input type="number" step="0.01" [(ngModel)]="notaActual.ponderacion"></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" (click)="cerrarModal()">Cancelar</button>
+      <button class="btn-save" (click)="guardar()">Guardar</button>
+    </div>
+  </div>
+</div>
