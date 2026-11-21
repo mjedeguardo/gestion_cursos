@@ -4,7 +4,7 @@
 </div>
 
 <div class="table-container">
-  <table>
+  <table class="responsive-table">
     <thead>
       <tr>
         <th>ID</th><th>ID Usuario</th><th>DNI Apoderado</th><th>Teléfono</th><th>F. Nacimiento</th><th>Acciones</th>
@@ -12,14 +12,16 @@
     </thead>
     <tbody>
       <tr *ngFor="let alumno of alumnos" appResaltar>
-        <td>{{ alumno.id_alumno }}</td>
-        <td>{{ alumno.id_usuario }}</td>
-        <td>{{ alumno.dni_apoderado }}</td>
-        <td>{{ alumno.telefono }}</td>
-        <td>{{ alumno.fecha_nacimiento }}</td>
-        <td>
-          <button class="btn-edit" (click)="abrirModalEditar(alumno)">Editar</button>
-          <button class="btn-delete" (click)="eliminar(alumno.id_alumno)">Eliminar</button>
+        <td data-label="ID">{{ alumno.id_alumno }}</td>
+        <td data-label="ID Usuario">{{ alumno.id_usuario }}</td>
+        <td data-label="DNI Apoderado">{{ alumno.dni_apoderado }}</td>
+        <td data-label="Teléfono">{{ alumno.telefono }}</td>
+        <td data-label="F. Nacimiento">{{ alumno.fecha_nacimiento }}</td>
+        <td data-label="Acciones">
+          <div class="action-buttons">
+            <button class="btn-edit" (click)="abrirModalEditar(alumno)">Editar</button>
+            <button class="btn-delete" (click)="eliminar(alumno.id_alumno)">Eliminar</button>
+          </div>
         </td>
       </tr>
     </tbody>

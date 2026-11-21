@@ -4,7 +4,7 @@
 </div>
 
 <div class="table-container">
-  <table>
+  <table class="responsive-table">
     <thead>
       <tr>
         <th>ID</th><th>Sección</th><th>Nombre del Curso</th><th>Descripción</th><th>Estado</th><th>Acciones</th>
@@ -12,14 +12,16 @@
     </thead>
     <tbody>
       <tr *ngFor="let curso of cursos" appResaltar>
-        <td>{{ curso.id_curso }}</td>
-        <td>{{ curso.id_seccion }}</td>
-        <td>{{ curso.nombre }}</td>
-        <td>{{ curso.descripcion }}</td>
-        <td><span class="badge" [ngClass]="curso.estado === 1 ? 'bg-success' : 'bg-danger'">{{ curso.estado | estado }}</span></td>
-        <td>
-          <button class="btn-edit" (click)="abrirModalEditar(curso)">Editar</button>
-          <button class="btn-delete" (click)="eliminar(curso.id_curso)">Eliminar</button>
+        <td data-label="ID">{{ curso.id_curso }}</td>
+        <td data-label="Sección">{{ curso.id_seccion }}</td>
+        <td data-label="Nombre">{{ curso.nombre }}</td>
+        <td data-label="Descripción">{{ curso.descripcion }}</td>
+        <td data-label="Estado"><span class="badge" [ngClass]="curso.estado === 1 ? 'bg-success' : 'bg-danger'">{{ curso.estado | estado }}</span></td>
+        <td data-label="Acciones">
+          <div class="action-buttons">
+            <button class="btn-edit" (click)="abrirModalEditar(curso)">Editar</button>
+            <button class="btn-delete" (click)="eliminar(curso.id_curso)">Eliminar</button>
+          </div>
         </td>
       </tr>
     </tbody>

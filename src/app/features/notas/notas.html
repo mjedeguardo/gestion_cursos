@@ -4,7 +4,7 @@
 </div>
 
 <div class="table-container">
-  <table>
+  <table class="responsive-table">
     <thead>
       <tr>
         <th>ID</th><th>ID Curso</th><th>ID Alumno</th><th>Evaluación</th><th>Calificación</th><th>Ponderación</th><th>Acciones</th>
@@ -12,15 +12,17 @@
     </thead>
     <tbody>
       <tr *ngFor="let nota of notas" appResaltar>
-        <td>{{ nota.id_nota }}</td>
-        <td>{{ nota.id_curso }}</td>
-        <td>{{ nota.id_alumno }}</td>
-        <td>{{ nota.nombre_evaluacion }}</td>
-        <td>{{ nota.calificacion }}</td>
-        <td>{{ nota.ponderacion }}</td>
-        <td>
-          <button class="btn-edit" (click)="abrirModalEditar(nota)">Editar</button>
-          <button class="btn-delete" (click)="eliminar(nota.id_nota)">Eliminar</button>
+        <td data-label="ID">{{ nota.id_nota }}</td>
+        <td data-label="ID Curso">{{ nota.id_curso }}</td>
+        <td data-label="ID Alumno">{{ nota.id_alumno }}</td>
+        <td data-label="Evaluación">{{ nota.nombre_evaluacion }}</td>
+        <td data-label="Calificación"><strong>{{ nota.calificacion }}</strong></td>
+        <td data-label="Ponderación">{{ nota.ponderacion }}</td>
+        <td data-label="Acciones">
+          <div class="action-buttons">
+            <button class="btn-edit" (click)="abrirModalEditar(nota)">Editar</button>
+            <button class="btn-delete" (click)="eliminar(nota.id_nota)">Eliminar</button>
+          </div>
         </td>
       </tr>
     </tbody>
