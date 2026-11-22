@@ -1,59 +1,65 @@
-# SistemaGestion
+# Sistema de Gestión Académica
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.4.
+Aplicación web SPA desarrollada en Angular para gestionar usuarios, alumnos, cursos y notas de una institución educativa, con login, rutas protegidas y control de acceso por rol.
 
-## Development server
+**Curso:** Desarrollo de Interfaces 3 (IDAT) - Evaluación final
+**Integrantes:** Miguel Angel Cardalcha Angulo, Cesar Manuel Juarez Edeguardo, Gean Martin Rivales de la Cruz
+**Demo:** https://gestion-cursos-liard.vercel.app
 
-To start a local development server, run:
+## Requisitos
+- Node.js (versión LTS reciente)
+- npm
+- Angular CLI (opcional): `npm install -g @angular/cli`
 
-```bash
-ng serve
-```
+## Instalación y ejecución
+1. Clonar el repositorio:
+   `git clone https://github.com/mjedeguardo/gestion_cursos.git`
+2. Entrar a la carpeta del proyecto:
+   `cd gestion_cursos`
+3. Instalar dependencias:
+   `npm install`
+4. Ejecutar la aplicación:
+   `npm start`
+5. Abrir en el navegador: http://localhost:4200
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Usuarios de prueba
+| Rol | Correo | Contraseña |
+|---|---|---|
+| Administrador | admin@test.com | 123456 |
+| Profesor | profesor@test.com | 123456 |
+| Estudiante | alumno@test.com | 123456 |
 
-## Code scaffolding
+## Permisos por rol
+| Sección | Admin | Profesor | Estudiante |
+|---|---|---|---|
+| Usuarios | Sí | No | No |
+| Alumnos | Sí | Sí | No |
+| Cursos (ver) | Sí | Sí | Sí |
+| Cursos (crear, editar, eliminar) | Sí | Sí | No |
+| Notas | Sí | Sí | Sí |
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Rutas
+- `/login`: pública (protegida por LoginGuard: si ya hay sesión, redirige al panel).
+- `/dashboard`: protegida por AuthGuard.
+  - `/dashboard/usuarios`, `/dashboard/alumnos`, `/dashboard/cursos`, `/dashboard/notas`: rutas hijas con RoleGuard según el rol.
+- Todas las rutas usan lazy loading (`loadComponent`).
+- Cualquier ruta inexistente muestra la página 404.
 
-```bash
-ng generate component component-name
-```
+## Seguridad
+- **AuthGuard:** exige un token JWT válido y no vencido.
+- **RoleGuard:** compara el rol del token con los roles permitidos de cada ruta.
+- **LoginGuard:** evita volver al login con sesión iniciada.
+- **JWT:** el login genera un token con `sub`, `rol` y `exp` (vence en 1 hora) y se guarda en localStorage.
+- **authInterceptor:** agrega `Authorization: Bearer <token>` a cada petición y cierra la sesión si hay error 401 o 403.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Servicios REST
+Un servicio por entidad (`UsuarioService`, `AlumnoService`, `CursoService`, `NotaService`) que usa HttpClient con GET, POST, PUT y DELETE sobre `api/<entidad>`.
 
-```bash
-ng generate --help
-```
+La API es simulada: un interceptor (`mockApiInterceptor`) responde las peticiones con datos en memoria, por eso los cambios se pierden al recargar la página.
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Estructura
+- `core/guards`: authGuard, roleGuard, loginGuard
+- `core/interceptors`: authInterceptor, mockApiInterceptor
+- `core/services`: auth, usuario, alumno, curso, nota, mock-api
+- `features`: login, dashboard, usuarios, alumnos, cursos, notas, not-found
+- `shared`: pipe `estado` y directiva `appResaltar` (propios)
