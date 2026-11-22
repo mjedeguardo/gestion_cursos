@@ -5,6 +5,7 @@ import { CursoService } from '../../core/services/curso';
 import { Curso } from '../../core/services/mock-api';
 import { EstadoPipe } from '../../shared/pipes/estado-pipe';
 import { ResaltarDirective } from '../../shared/directives/resaltar';
+import { AuthService } from '../../core/services/auth';
 
 @Component({
   selector: 'app-cursos',
@@ -16,6 +17,8 @@ import { ResaltarDirective } from '../../shared/directives/resaltar';
 export class CursosComponent implements OnInit {
   private cursoService = inject(CursoService);
   private cdr = inject(ChangeDetectorRef);
+  private auth = inject(AuthService);
+  puedeEditar = this.auth.getRol() === 1 || this.auth.getRol() === 2;
 
   cursos: Curso[] = [];
   mostrarModal = false;

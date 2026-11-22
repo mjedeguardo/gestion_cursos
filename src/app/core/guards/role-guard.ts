@@ -3,18 +3,12 @@ import { Router, ActivatedRouteSnapshot } from '@angular/router';
 import { AuthService } from '../services/auth';
 
 export const roleGuard = (route: ActivatedRouteSnapshot) => {
-  const authService = inject(AuthService);
+  const auth = inject(AuthService);
   const router = inject(Router);
-  
-  const userRol = authService.getRol();
-  const allowedRoles = route.data['roles'] as number[];
+  const allowed = route.data['roles'] as number[];
 
-  // Si el rol del usuario está dentro de los permitidos, pasa
-  if (allowedRoles && allowedRoles.includes(userRol)) {
-    return true;
-  }
-  
-  // Si no tiene permiso, lo mandamos al dashboard
-  router.navigate(['/dashboard']); 
-  return false;
+  if (allowed && allowed.includes(auth.getRol())) return true;
+
+  alert('Acceso denegado: no tienes permiso para esta sección.');
+  return router.createUrlTree(['/dashboard/cursos']);
 };

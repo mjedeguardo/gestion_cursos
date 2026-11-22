@@ -1,6 +1,6 @@
 <div class="header-actions">
   <h2>Gestión de Cursos</h2>
-  <button class="btn-primary" (click)="abrirModalCrear()">+ Nuevo Curso</button>
+  <button *ngIf="puedeEditar" class="btn-primary" (click)="abrirModalCrear()">+ Nuevo Curso</button>
 </div>
 
 <div class="table-container">
@@ -18,7 +18,7 @@
         <td data-label="Descripción">{{ curso.descripcion }}</td>
         <td data-label="Estado"><span class="badge" [ngClass]="curso.estado === 1 ? 'bg-success' : 'bg-danger'">{{ curso.estado | estado }}</span></td>
         <td data-label="Acciones">
-          <div class="action-buttons">
+          <div class="action-buttons" *ngIf="puedeEditar">
             <button class="btn-edit" (click)="abrirModalEditar(curso)">Editar</button>
             <button class="btn-delete" (click)="eliminar(curso.id_curso)">Eliminar</button>
           </div>
