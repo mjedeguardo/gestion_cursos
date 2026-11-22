@@ -1,28 +1,40 @@
-<div class="login-container">
-  <div class="login-card">
-    <h2>Iniciar Sesión</h2>
-    <p class="subtitle">Sistema de Gestión Académica</p>
+<div class="login-wrapper">
+  
+  <!-- LADO IZQUIERDO: Imagen desde la nube -->
+  <div class="login-left">
+    <img src="https://img.magnific.com/vector-gratis/ilustracion-neuroeducacion-dibujada-mano_23-2150945405.jpg?semt=ais_hybrid&w=740&q=80" alt="Estudiante" class="imagen-fondo">
+  </div>
 
-    <form (ngSubmit)="login()">
-      <div class="form-group">
-        <label>Correo Electrónico</label>
-        <input type="email" [(ngModel)]="email" name="email" required placeholder="admin@test.com">
+  <!-- LADO DERECHO: Formulario -->
+  <div class="login-right">
+    <div class="login-form-container">
+      <div class="logo-area">
+        <h1>EDU<span>-X</span></h1>
+        <p>Welcome Back !</p>
       </div>
 
-      <div class="form-group">
-        <label>Contraseña</label>
-        <input type="password" [(ngModel)]="password" name="password" required placeholder="123456">
-      </div>
+      <form (ngSubmit)="login()">
+        <div class="form-group">
+          <label>EMAIL ID</label>
+          <input type="email" [(ngModel)]="email" name="email" required placeholder="kunal@bvp.com">
+        </div>
 
-      <div *ngIf="errorMensaje" class="error-msg">
-        {{ errorMensaje }}
-      </div>
+        <div class="form-group">
+          <label>PASSWORD</label>
+          <input type="password" [(ngModel)]="password" name="password" required placeholder="********">
+        </div>
 
-      <button type="submit">Ingresar</button>
-    </form>
-    
-    <div class="hint">
-      <small>Usa: <b>admin@test.com</b> / <b>123456</b></small>
+        <div class="forgot-password">
+          <a href="#">Forgot Password ?</a>
+        </div>
+
+        <div *ngIf="errorMensaje" class="error-msg">
+          {{ errorMensaje }}
+        </div>
+
+        <button type="submit" class="btn-login">Log In</button>
+      </form>
     </div>
   </div>
+
 </div>

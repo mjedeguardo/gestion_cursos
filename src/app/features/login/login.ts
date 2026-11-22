@@ -15,16 +15,22 @@ export class LoginComponent {
   private authService = inject(AuthService);
   private router = inject(Router);
 
+  // Variables enlazadas al HTML
   email = '';
   password = '';
   errorMensaje = '';
 
   login() {
-    this.authService.login({ email: this.email, password: this.password }).subscribe(res => {
-      if (res.token) {
-        this.router.navigate(['/dashboard']); // Si hay token, entra
-      } else {
-        this.errorMensaje = 'Credenciales incorrectas'; // Si no, muestra error
+    this.authService.login({ email: this.email, password: this.password }).subscribe({
+      next: (res) => {
+        if (res && res.token) {
+          this.router.navigate(['/dashboard']); // Redirige al dashboard si hay token
+        } else {
+          this.errorMensaje = 'Credenciales incorrectas'; // Mensaje de error
+        }
+      },
+      error: (err) => {
+        this.errorMensaje = 'Error de conexión con el servidor';
       }
     });
   }

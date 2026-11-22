@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+/* Reset básico para eliminar márgenes y paddings por defecto */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;   /* ocupa toda la altura de la pantalla */
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;  /* evita scroll horizontal */
+}
